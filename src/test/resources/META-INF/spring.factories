@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.example.config.LockConfigure,\
+com.example.aop.LockAspect
