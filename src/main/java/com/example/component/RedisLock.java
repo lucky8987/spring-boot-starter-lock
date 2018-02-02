@@ -3,7 +3,6 @@ package com.example.component;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
-import javax.annotation.PreDestroy;
 import org.redisson.Redisson;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
@@ -12,7 +11,7 @@ import org.redisson.api.RedissonClient;
  * redis 分布式锁实现
  *
  */
-public class RedisLock implements Lock {
+public class RedisLock implements Lock, AutoCloseable {
 
     private RedissonClient redisson;
 
@@ -31,6 +30,11 @@ public class RedisLock implements Lock {
     @Override
     public void lock() {
         rLock.lock();
+    }
+
+    public Lock autoLock() {
+        lock();
+        return this;
     }
 
     public void lockInterruptibly() throws InterruptedException {
@@ -53,4 +57,8 @@ public class RedisLock implements Lock {
         return rLock.newCondition();
     }
 
+    @Override
+    public void close() throws Exception {
+        unlock();
+    }
 }

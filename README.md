@@ -7,7 +7,7 @@
  
     application.properties(yml) 配置相关的lockName, 例如：
     ```properties
-      redis-lock.names: test_lock, demo_lock, temp_lock
+      lock.names = test_lock, demo_lock, temp_lock
     ```
     
     使用方式如下：
@@ -19,13 +19,13 @@
       public class CounterService {
             
           /**
-           * lockName 来源 application.properties 中配置的 redis-lock.names
+           * lockName 来源 application.properties 中配置的 lock.names
            * 推荐使用 @resource 指定 lockName 的方式获取lockBean
            * 当然你也可以使用 @Autowired + @Qualifier("test_lock") 获取lockBean
            * 注意：如果不指定lockName 则默认获取到的 名称为：global_lock 的 lockBean
            */  
           @Resource(name = "test_lock")
-          private RedisLock testLock;
+          private Lock testLock;
       
           private Integer count = new Integer(100);
           
@@ -111,5 +111,5 @@
       }
     ```
     
-> TODO 基于zk的分布式锁实现、锁竞争优化、公平锁的实现
+> TODO 锁竞争优化、公平锁的实现
     

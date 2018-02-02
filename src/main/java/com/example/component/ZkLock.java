@@ -12,7 +12,7 @@ import java.util.concurrent.locks.Lock;
  * zk 分布式锁实现
  *
  */
-public class ZkLock implements Lock {
+public class ZkLock implements Lock, AutoCloseable {
 
     private InterProcessMutex sync;
 
@@ -77,4 +77,9 @@ public class ZkLock implements Lock {
         return null;
     }
 
+
+    @Override
+    public void close() throws Exception {
+       unlock();
+    }
 }
