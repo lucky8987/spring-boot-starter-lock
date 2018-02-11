@@ -1,5 +1,5 @@
 ## 分布式锁 - starter
-> 基于redis 的 setnx 实现的分布式锁组件
+> 基于redis 的 setnx 实现 和 zk 的分布式锁组件
 
 #### 使用场景：
 

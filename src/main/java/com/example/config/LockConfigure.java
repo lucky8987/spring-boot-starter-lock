@@ -1,7 +1,5 @@
 package com.example.config;
 
-import com.example.component.RedisLock;
-import com.example.component.ZkLock;
 import com.example.properties.LockPropertes;
 import com.example.properties.LockType;
 import com.netflix.curator.framework.CuratorFramework;
@@ -20,7 +18,6 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.boot.ansi.AnsiColor;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
@@ -28,7 +25,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConditionalOnClass(RedisLock.class)
 @EnableAutoConfiguration
 @EnableConfigurationProperties(LockPropertes.class)
 public class LockConfigure{
@@ -99,7 +95,7 @@ public class LockConfigure{
             }
             e.printStackTrace();
         }
-        System.out.println((char)27 + "["+ AnsiColor.GREEN+"Successfully create a distributed lock by "+ lockPropertes.getType() +" with a name: "+ Arrays.toString(lockPropertes.getNames()) + (char)27 + "[0m");
+        System.out.println((char)27 + "["+ AnsiColor.GREEN+"mSuccessfully create a distributed lock by "+ lockPropertes.getType() +" with a name: "+ Arrays.toString(lockPropertes.getNames()) + (char)27 + "[0m");
         return lock == null ? null : (Lock) lock;
     }
 
