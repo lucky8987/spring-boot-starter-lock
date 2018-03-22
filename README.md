@@ -85,7 +85,7 @@
 - case2: 使用注解加锁, 不需要在application.properties中配置names; 代码如下：
 
     ```java
-      import com.example.annotation.RedisLock;
+      import com.example.annotation.DistributedLock;
       import org.springframework.stereotype.Service;
       
       @Service
@@ -96,7 +96,7 @@
           /**
           * aop 实现加锁, 业务方法过粗的情况下不推荐使用
           */
-          @RedisLock(name = "test_lock")
+          @DistributedLock(name = "test_lock")
           public Integer increment() {
               while (count > 0) {
                   try {
